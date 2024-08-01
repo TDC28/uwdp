@@ -1,4 +1,4 @@
-from app.models.program import Program
+from ..program import Program
 
 class Minor(Program):
     """

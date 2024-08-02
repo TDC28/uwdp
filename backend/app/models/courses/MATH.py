@@ -1,4 +1,4 @@
-from .course import Course
+from ..course import Course
 from ..reqs import XOf, AllOf
 
 # TODO: Implement antirequisites

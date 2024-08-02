@@ -1,3 +1,5 @@
+# NOTE: This will likely all be rewritten
+
 class CourseList:
     """
     Represents requirements for a degree or course

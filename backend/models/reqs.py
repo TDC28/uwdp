@@ -6,7 +6,7 @@ class CourseList:
     """
 
     def __init__(self):
-        self.reqs = None
+        self.requirements = None
 
     def set_requirements(self, requirements):
         return NotImplemented

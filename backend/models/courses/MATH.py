@@ -1,5 +1,6 @@
 from ..course import Course
 from ..reqs import XOf, AllOf
+from ..program import Major
 
 # TODO: Implement antirequisites
 
@@ -11,8 +12,9 @@ class MATH135(Course):
 
 class MATH136(Course):
     def __init__(self):
-        super().__init__("MATH136")
-        self.prereqs = XOf([MATH135(), "Science Mathematical Physics"]) # TODO: Implement program checking
+        super().__init__(
+            "MATH136", XOf([MATH135(), Major("Mathematical Physics", "Science")])
+        )
 
 
 class MATH137(Course):

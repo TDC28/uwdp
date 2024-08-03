@@ -5,6 +5,10 @@ class Program:
 
     def __init__(self, name):
         self.name = name
+        self._requirements = None
+
+    def set_requirements(self, requirements):
+        self._requirements = requirements
 
 
 class Major(Program):
@@ -12,8 +16,9 @@ class Major(Program):
     ...
     """
 
-    def __init__(self) -> None:
-        pass
+    def __init__(self, name, faculty):
+        super().__init__(name)
+        self.faculty = faculty
 
 
 class Minor(Program):
@@ -21,8 +26,7 @@ class Minor(Program):
     ...
     """
 
-    def __init__(self) -> None:
-        pass
+    pass
 
 
 class Option(Program):
@@ -30,5 +34,4 @@ class Option(Program):
     An option...
     """
 
-    def __init__(self) -> None:
-        pass
+    pass

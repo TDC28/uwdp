@@ -1,3 +1,6 @@
+.env
+.venv
+
 ## Django ##
 *.log
 *.pot
@@ -5,4 +8,3 @@
 __pycache__
 db.sqlite3
 media
-.venv

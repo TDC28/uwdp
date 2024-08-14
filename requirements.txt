@@ -3,10 +3,14 @@ dj-database-url==2.2.0
 dj-email-url==1.0.6
 Django==5.0.7
 django-cache-url==3.4.5
+django-cors-headers==4.4.0
+django-jazzmin==3.0.0
 djangorestframework==3.15.2
+djangorestframework-simplejwt==5.3.1
 environs==11.0.0
 marshmallow==3.21.3
 packaging==24.1
+PyJWT==2.9.0
 python-dotenv==1.0.1
 sqlparse==0.5.1
 typing_extensions==4.12.2

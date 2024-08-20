@@ -1,10 +1,10 @@
 # UWDP
 
-UWDP is an attempted replacement to UW Flow's schedule features and UW Path. The project is still in its early developpment stages
+UWDP is an attempted replacement UW Path, which is no longer maintained. The project is still in its early developpment stages.
 
 ## Try out UWDP
 
-Clone the repository, then you will need to run the frontend and backend.
+Clone the repository, then run the frontend and backend.
 
 - Frontend
 ```bash
@@ -15,14 +15,11 @@ npm run dev
 
 - Backend
 > [!WARNING]
-> You should use a virtual environment when running this project
+> You should use a virtual environment
 
 ```bash
 cd backend
 pip install -r requirements.txt
+python manage.py createsuperuser # Create a superuser
 python manage.py runserver
 ```
-
-> [!NOTE]
-> You should start by creating a superuser with `python manage.py createsuperuser`
-

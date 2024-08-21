@@ -13,3 +13,9 @@ Default port: 8000
         - "username"
         - "password"
         - "email"
+
+- /api/courses/
+    - Add a course (POST)
+        - Not implemented
+
+    - List all courses (GET)

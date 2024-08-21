@@ -1,6 +1,8 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 
+from api.models import Course
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -23,3 +25,15 @@ class RegisterSerializer(serializers.ModelSerializer):
         )
 
         return user
+
+
+class CourseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Course
+        fields = (
+            "subject",
+            "code",
+            "prereqs",
+            "antireqs",
+            "coreqs",
+        )

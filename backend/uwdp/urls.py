@@ -24,4 +24,5 @@ from api.views.authentication_views import login_view
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/auth/", include("api.urls.authentication_urls")),
+    path("api/courses/", include("api.urls.course_urls")),
 ]

@@ -1,12 +1,24 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 
 class Course(models.Model):
-    subject = models.CharField(max_length=50)
     code = models.IntegerField()
+    subject = models.CharField(max_length=50)
     prereqs = models.CharField(max_length=256, default="")
     antireqs = models.CharField(max_length=256, default="")
     coreqs = models.CharField(max_length=256, default="")
 
     def __str__(self):
         return f"{self.subject} {self.code}"
+
+
+class Term(models.Model):
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="terms", default=""
+    )
+    study_term = models.CharField(max_length=4)
+    courses = models.JSONField()
+
+    def __str__(self):
+        return f"{self.study_term}"

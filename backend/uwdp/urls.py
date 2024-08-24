@@ -25,4 +25,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/auth/", include("api.urls.authentication_urls")),
     path("api/courses/", include("api.urls.course_urls")),
+    path("api/terms/", include("api.urls.term_urls")),
 ]

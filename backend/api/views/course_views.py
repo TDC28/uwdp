@@ -1,13 +1,12 @@
 from api.models import Course
+from api.serializers import CourseSerializer
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from api.serializers import CourseSerializer
-
 
 @api_view(["GET", "POST"])
-def courses_view(request):
+def courses(request):
     if request.method == "GET":
         courses = Course.objects.all().order_by("subject", "code")
         course_list = []

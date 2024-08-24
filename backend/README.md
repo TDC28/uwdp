@@ -15,6 +15,8 @@ Default port: 8000
         - "email": CharField
 
 - /api/courses/
+    - List all courses (GET)
+
     - Add a course (POST)
         - "subject": CharField
         - "code": IntegerField
@@ -22,4 +24,10 @@ Default port: 8000
         - "antireqs": CharField (default: "")
         - "coreqs": CharField (default: "")
 
-    - List all courses (GET)
+- /api/terms/ (Authentication required)
+    - List all terms (GET)
+
+    - Add a term (POST)
+        - "username": CharField (Read only)
+        - "study_term": CharField
+        - "courses": JSONField

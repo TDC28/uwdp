@@ -1,14 +1,13 @@
+from api.models import Term
+from api.serializers import TermSerializer
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from api.models import Term
-from api.serializers import TermSerializer
 
-
-@permission_classes([IsAuthenticated])
 @api_view(["GET", "POST"])
+@permission_classes([IsAuthenticated])
 def terms(request):
     if request.method == "GET":
         terms = Term.objects.all().order_by("id")

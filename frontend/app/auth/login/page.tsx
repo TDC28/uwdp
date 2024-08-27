@@ -1,5 +1,5 @@
-import Link from 'next/link';
-import { Card } from './Card';
+import Link from "next/link";
+import { Card } from "./Card";
 
 export default function RegisterPage() {
   return (
@@ -8,8 +8,8 @@ export default function RegisterPage() {
         <h1 className="font-semibold text-xl mb-4 py-3 text-center"> Login </h1>
         <Card />
         <p className="text-center font-medium mt-5 text-sm">
-          No account?{' '}
-          <Link href="/register" className="text-indigo-500 hover:underline">
+          No account?{" "}
+          <Link href="register" className="text-indigo-500 hover:underline">
             Register
           </Link>
         </p>
@@ -17,3 +17,4 @@ export default function RegisterPage() {
     </div>
   );
 }
+

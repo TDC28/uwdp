@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Nunito } from "next/font/google";
+import NavBar from "@/components/navbar";
 import "./globals.css";
 
 const inter = Nunito({ subsets: ["latin"] });

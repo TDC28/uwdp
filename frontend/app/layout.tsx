@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Nunito } from "next/font/google";
-import NavBar from "@/components/navbar";
+import { Raleway } from "next/font/google";
+import Nav from "@/components/Nav";
 import "./globals.css";
 
-const inter = Nunito({ subsets: ["latin"] });
+const font = Raleway({ weight: "500", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "UWDP",
@@ -17,7 +17,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={font.className}>
+        <Nav />
+        {children}
+      </body>
     </html>
   );
 }

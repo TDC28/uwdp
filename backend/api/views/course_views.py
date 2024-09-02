@@ -17,11 +17,11 @@ def courses(request):
         return Response(course_list, status=status.HTTP_200_OK)
 
     elif request.method == "POST":
-        serializer = CourseSerializer(data=request.data)
+        course = CourseSerializer(data=request.data)
 
-        if serializer.is_valid():
-            serializer.save()
+        if course.is_valid():
+            course.save()
 
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response(course.data, status=status.HTTP_200_OK)
 
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(course.errors, status=status.HTTP_400_BAD_REQUEST)

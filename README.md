@@ -1,8 +1,8 @@
 # UWDP
 
-UWDP is an attempted replacement UW Path, which is no longer maintained. The project is still in its early developpment stages.
+UWDP is an attempted replacement for UW Path, which is no longer maintained. UWDP is still in its early developpment stages.
 
-## Try out UWDP
+## Try UWDP
 
 Clone the repository, then run the frontend and backend.
 

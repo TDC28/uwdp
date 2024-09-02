@@ -1,47 +1,33 @@
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuIndicator,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
-  NavigationMenuViewport,
-} from "@/components/ui/navigation-menu";
 import Link from "next/link";
+import { Input } from "@/components/ui/input";
 
 export default function Nav() {
   return (
-    <NavigationMenu>
-      <NavigationMenuList>
-        <NavigationMenuItem>
-          <Link href="/" legacyBehavior passHref>
-            <img src="/logo.png" alt="UWDP Logo" className="h-14 pl-2" />
+    <header>
+      <nav className="flex justify-between">
+        <div className="flex items-center space-x-5">
+          <Link href="/" className="hover:text-gray-500">
+            <img src="/logo.png" alt="UWDP Logo" className="h-14 pl-3" />
           </Link>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link href="/dashboard" legacyBehavior passHref>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Dashboard
-            </NavigationMenuLink>
+          <Link href="/dashboard" className="hover:text-gray-500">
+            Dashboard
           </Link>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link href="/auth/login" legacyBehavior passHref>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Login
-            </NavigationMenuLink>
+          <Link href="/auth/login" className="hover:text-gray-500">
+            Login
           </Link>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link href="/auth/register" legacyBehavior passHref>
-            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Register
-            </NavigationMenuLink>
+          <Link href="/auth/register" className="hover:text-gray-500">
+            Register
           </Link>
-        </NavigationMenuItem>
-      </NavigationMenuList>
-    </NavigationMenu>
+        </div>
+        <div className="flex justify-right items-center pr-5">
+          <Link href="/auth/login">
+            <img src="/profile.png" alt="Profile" className="h-8 px-3" />
+          </Link>
+          <Link href="https://github.com/TDC28/uwdp">
+            <img src="/github.png" alt="GitHub" className="h-7 px-3" />
+          </Link>
+        </div>
+      </nav>
+    </header>
   );
 }

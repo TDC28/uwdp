@@ -5,9 +5,9 @@ from django.db import models
 class Course(models.Model):
     code = models.IntegerField()
     subject = models.CharField(max_length=50)
-    prereqs = models.CharField(max_length=256, default="")
-    antireqs = models.CharField(max_length=256, default="")
-    coreqs = models.CharField(max_length=256, default="")
+    prereqs = models.JSONField()
+    antireqs = models.JSONField()
+    coreqs = models.JSONField()
 
     def __str__(self):
         return f"{self.subject} {self.code}"

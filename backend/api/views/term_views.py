@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 
-@api_view(["GET", "POST"])
+@api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def terms(request):
     if request.method == "GET":
@@ -17,6 +17,21 @@ def terms(request):
             term_list.append(TermSerializer(term).data)
 
         return Response(term_list, status=status.HTTP_200_OK)
+
+
+@api_view(["GET", "POST"])
+@permission_classes([IsAuthenticated])
+def user_terms(request):
+    if request.method == "GET":
+        user = request.user
+        terms = Term.objects.filter(user=user)
+        term_list = []
+
+        for term in terms:
+            term_list.append(TermSerializer(term).data)
+
+        return Response(term_list, status=status.HTTP_200_OK)
+
 
     elif request.method == "POST":
         serializer = TermSerializer(data=request.data)

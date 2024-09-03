@@ -1,11 +1,14 @@
 "use client";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
 
 export function LoginForm() {
+  const router = useRouter();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -29,7 +32,7 @@ export function LoginForm() {
     });
 
     if (response.ok) {
-      setLoginAlert("User logged in successfully");
+      router.push("/dashboard");
     } else {
       const data = await response.json();
       const message = data.error;

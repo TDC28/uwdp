@@ -15,6 +15,9 @@ export default function Nav() {
           <Link href="/auth/login" className="hover:text-gray-500">
             Login
           </Link>
+          <Link href="/auth/logout" className="hover:text-gray-500">
+            Logout
+          </Link>
           <Link href="/auth/register" className="hover:text-gray-500">
             Register
           </Link>

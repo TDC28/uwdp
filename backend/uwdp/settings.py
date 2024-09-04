@@ -36,7 +36,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    "unfold",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -132,10 +131,11 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-CORS_ALLOWED_ORIGINS = ["http://localhost:3000"]
+# CORS_ALLOWED_ORIGINS = ["http://localhost:3000"]
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
-
-REST_FRAMEWORK = {
-    # "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"]
-}
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:3000",  # React frontend
+    "http://localhost:8000",  # Django backend (if needed)
+]

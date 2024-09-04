@@ -38,7 +38,6 @@ def register_view(request):
 @api_view(["POST"])
 def logout_view(request):
     if request.user.is_authenticated:
-        print("trying to logout")
         logout(request)
         return Response(
             {"message": "Successfully logged out"}, status=status.HTTP_200_OK
@@ -47,3 +46,12 @@ def logout_view(request):
         return Response(
             {"error": "User not authenticated"}, status=status.HTTP_400_BAD_REQUEST
         )
+
+
+@api_view(["GET"])
+def get_user(request):
+    if request.user.is_authenticated:
+        return Response({"user": request.user.username}, status=status.HTTP_200_OK)
+
+    else:
+        return Response({"user": "Not logged in"}, status=status.HTTP_200_OK)

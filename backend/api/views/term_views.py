@@ -1,13 +1,13 @@
-from api.models import Term
-from api.serializers import TermSerializer
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
+from api.models import Term
+from api.serializers import TermSerializer
+
 
 @api_view(["GET"])
-@permission_classes([IsAuthenticated])
 def terms(request):
     if request.method == "GET":
         terms = Term.objects.all().order_by("id")
@@ -31,7 +31,6 @@ def user_terms(request):
             term_list.append(TermSerializer(term).data)
 
         return Response(term_list, status=status.HTTP_200_OK)
-
 
     elif request.method == "POST":
         serializer = TermSerializer(data=request.data)

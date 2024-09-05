@@ -14,11 +14,10 @@ def login_view(request):
     user = authenticate(request, username=username, password=password)
 
     if user is not None:
-        print("auth success for user ", user)
         login(request, user)
-        print("User logged in:", request.user)
-        serializer = UserSerializer(user)
-        return Response(serializer.data)
+
+        serialized_user = UserSerializer(user)
+        return Response(serialized_user.data)
 
     return Response(
         {"error": "Invalid credentials"}, status=status.HTTP_400_BAD_REQUEST
@@ -39,6 +38,7 @@ def register_view(request):
 def logout_view(request):
     if request.user.is_authenticated:
         logout(request)
+
         return Response(
             {"message": "Successfully logged out"}, status=status.HTTP_200_OK
         )
@@ -51,7 +51,13 @@ def logout_view(request):
 @api_view(["GET"])
 def get_user(request):
     if request.user.is_authenticated:
-        return Response({"user": request.user.username}, status=status.HTTP_200_OK)
+        return Response(
+            {"user": request.user.username, "user_status": "logged-in"},
+            status=status.HTTP_200_OK,
+        )
 
     else:
-        return Response({"user": "Not logged in"}, status=status.HTTP_200_OK)
+        return Response(
+            {"user": "Not logged in", "user_status": "logged-out"},
+            status=status.HTTP_200_OK,
+        )

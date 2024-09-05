@@ -12,18 +12,12 @@ export default function Nav() {
           <Link href="/dashboard" className="hover:text-gray-500">
             Dashboard
           </Link>
-          <Link href="/auth/login" className="hover:text-gray-500">
-            Login
-          </Link>
           <Link href="/auth/logout" className="hover:text-gray-500">
             Logout
           </Link>
-          <Link href="/auth/register" className="hover:text-gray-500">
-            Register
-          </Link>
         </div>
         <div className="flex justify-right items-center pr-5">
-          <Link href="/auth/login">
+          <Link href="/profile">
             <img src="/profile.png" alt="Profile" className="h-8 px-3" />
           </Link>
           <Link href="https://github.com/TDC28/uwdp">

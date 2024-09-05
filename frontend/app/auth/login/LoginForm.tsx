@@ -1,15 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
-//import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
-import Cookies from "js-cookie";
 
 export function LoginForm() {
-  //const router = useRouter();
-  const csrftoken = Cookies.get("csrftoken");
+  const router = useRouter();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -28,7 +26,6 @@ export function LoginForm() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "X-CSRFToken": csrftoken ?? "",
       },
       credentials: "include",
 
@@ -39,7 +36,7 @@ export function LoginForm() {
 
     if (response.ok) {
       console.log("Authenticated ", data.username);
-      //router.push("/dashboard");
+      router.push("/profile");
     } else {
       const message = data.error;
       setLoginAlert(message);

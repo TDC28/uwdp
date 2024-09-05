@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Cookies from "js-cookie";
 
 interface Term {
   username: string;
@@ -15,13 +14,8 @@ export default function DashboardPage() {
   useEffect(() => {
     const getTerms = async () => {
       try {
-        const csrftoken = Cookies.get("csrftoken");
         const response = await fetch("http://localhost:8000/api/terms/", {
           method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            "X-CSRFToken": csrftoken ?? "",
-          },
           credentials: "include",
         });
 
@@ -31,6 +25,7 @@ export default function DashboardPage() {
           setTermsData(data);
         } else {
           console.log("An error occured fetching terms");
+          console.log("Are you logged in?");
           // Do stuff
         }
       } catch (error) {

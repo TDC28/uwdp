@@ -3,9 +3,7 @@
 import Cookies from "js-cookie";
 
 export default function LogoutPage() {
-  const onSubmit = async (e) => {
-    e.preventDefault();
-
+  const onSubmit = async () => {
     const csrftoken = Cookies.get("csrftoken");
 
     const response = await fetch("http://localhost:8000/api/auth/logout/", {

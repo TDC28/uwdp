@@ -40,8 +40,8 @@ class CourseSerializer(serializers.ModelSerializer):
 
 
 class TermSerializer(serializers.ModelSerializer):
-    username = serializers.CharField(source="user.username", read_only=True)
+    # username = serializers.CharField(source="user.username", read_only=True)
 
     class Meta:
         model = Term
-        fields = ("username", "study_term", "courses")
+        fields = ("study_term", "courses")

@@ -3,13 +3,12 @@
 import { useEffect, useState } from "react";
 
 interface Term {
-  username: string;
   study_term: string;
   courses: string[];
 }
 
 export default function DashboardPage() {
-  const [userTerms, setTermsData] = useState<Term[]>([]);
+  const [termsData, setTermsData] = useState<Term[]>([]);
 
   useEffect(() => {
     const getTerms = async () => {
@@ -35,14 +34,35 @@ export default function DashboardPage() {
     getTerms();
   }, []);
 
-  const handleInputChange = (
+  const handleCourseChange = (
     termIndex: number,
     courseIndex: number,
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    const newTermsData = [...userTerms];
+    const newTermsData = [...termsData];
 
     newTermsData[termIndex].courses[courseIndex] = e.target.value;
+    setTermsData(newTermsData);
+  };
+
+  const handleCourseCreate = (termIndex: number) => {
+    const newTermsData = [...termsData];
+
+    newTermsData[termIndex].courses.push("");
+    setTermsData(newTermsData);
+  };
+
+  const handleNewTerm = () => {
+    const newTermsData = [...termsData];
+    const new_study_term =
+      String(Math.floor(newTermsData.length / 2) + 1) +
+      (newTermsData.length % 2 === 0 ? "A" : "B");
+
+    newTermsData.push({
+      study_term: new_study_term,
+      courses: [],
+    });
+
     setTermsData(newTermsData);
   };
 
@@ -51,18 +71,22 @@ export default function DashboardPage() {
   //}
   return (
     <div className="h-screen w-screen sm:bg-gradient-to-b from-green-300 to-indigo-400">
-      {userTerms.map((term, termIndex) => (
+      {termsData.map((term, termIndex) => (
         <div key={termIndex}>
           <h2>Term {termIndex + 1}</h2>
           {term.courses.map((course, courseIndex) => (
             <input
               key={courseIndex}
               value={course}
-              onChange={(e) => handleInputChange(termIndex, courseIndex, e)}
+              onChange={(e) => handleCourseChange(termIndex, courseIndex, e)}
             ></input>
           ))}
+          <button onClick={() => handleCourseCreate(termIndex)}>
+            Add new course
+          </button>
         </div>
       ))}
+      <button onClick={() => handleNewTerm()}>Add new term</button>
     </div>
   );
 }

@@ -9,6 +9,7 @@ interface Term {
 
 export default function DashboardPage() {
   const [termsData, setTermsData] = useState<Term[]>([]);
+  const [saveButtonEnabled, setSaveButtonEnabled] = useState(false);
 
   useEffect(() => {
     const getTerms = async () => {
@@ -42,14 +43,18 @@ export default function DashboardPage() {
     const newTermsData = [...termsData];
 
     newTermsData[termIndex].courses[courseIndex] = e.target.value;
+
     setTermsData(newTermsData);
+    setSaveButtonEnabled(true);
   };
 
   const handleCourseCreate = (termIndex: number) => {
     const newTermsData = [...termsData];
 
     newTermsData[termIndex].courses.push("");
+
     setTermsData(newTermsData);
+    setSaveButtonEnabled(true);
   };
 
   const handleNewTerm = () => {
@@ -64,6 +69,23 @@ export default function DashboardPage() {
     });
 
     setTermsData(newTermsData);
+    setSaveButtonEnabled(true);
+  };
+
+  const handleDeleteTerm = () => {
+    const newTermsData = [...termsData];
+    const lastIndex = newTermsData.length - 1;
+
+    if (lastIndex >= 0) {
+      newTermsData.splice(lastIndex);
+    }
+
+    setTermsData(newTermsData);
+  };
+
+  const handleSaveTerms = () => {
+    console.log("Save the user's terms on backend");
+    setSaveButtonEnabled(false);
   };
 
   //for (let i = 0; i < inputFields.length; i++) {
@@ -87,6 +109,8 @@ export default function DashboardPage() {
         </div>
       ))}
       <button onClick={() => handleNewTerm()}>Add new term</button>
+      <button onClick={() => handleDeleteTerm()}>Delete last term</button>
+      <button onClick={() => handleSaveTerms()}>Save</button>
     </div>
   );
 }

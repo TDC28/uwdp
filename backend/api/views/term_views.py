@@ -41,3 +41,17 @@ def user_terms(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+# @ decorators. 
+# Exchange terms/modify the terms 
+@api_view(["PUT"])
+@permission_classes([IsAuthenticated])
+def update_terms(request):
+    if request.method =="PUT":
+        user = request.user
+        terms = TermSerializer(data=request.data)
+        if terms.is_valid():
+            terms.save(user=request.user)
+            return Response(terms.data, status=status.HTTP_200_OK)
+        return Response(terms.errors, status=status.HTTP_400_BAD_REQUEST)
+

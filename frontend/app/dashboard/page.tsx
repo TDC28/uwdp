@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
 
 interface Term {
   study_term: string;
@@ -10,6 +11,7 @@ interface Term {
 export default function DashboardPage() {
   const [termsData, setTermsData] = useState<Term[]>([]);
   const [saveButtonEnabled, setSaveButtonEnabled] = useState(false);
+  const csrftoken = Cookies.get("csrftoken");
 
   useEffect(() => {
     const getTerms = async () => {
@@ -22,7 +24,7 @@ export default function DashboardPage() {
         if (response.ok) {
           const data = await response.json();
           console.log(data);
-          setTermsData(data);
+          setTermsData(data.terms);
         } else {
           console.log("An error occured fetching terms");
           console.log("Are you logged in?");
@@ -83,8 +85,24 @@ export default function DashboardPage() {
     setTermsData(newTermsData);
   };
 
-  const handleSaveTerms = () => {
-    console.log("Save the user's terms on backend");
+  const handleSaveTerms = async () => {
+    const response = await fetch("http://localhost:8000/api/terms/", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": csrftoken ?? "",
+      },
+      credentials: "include",
+      body: JSON.stringify({ terms: termsData }),
+    });
+
+    if (response.ok) {
+      console.log("Updated terms successfully");
+    } else {
+      const data = await response.json();
+      console.log(data);
+    }
+
     setSaveButtonEnabled(false);
   };
 

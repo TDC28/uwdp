@@ -110,25 +110,33 @@ export default function DashboardPage() {
   //  terms.push(inputFields)
   //}
   return (
-    <div className="h-screen w-screen sm:bg-gradient-to-b from-green-300 to-indigo-400">
-      {termsData.map((term, termIndex) => (
-        <div key={termIndex}>
-          <h2>Term {termIndex + 1}</h2>
-          {term.courses.map((course, courseIndex) => (
-            <input
-              key={courseIndex}
-              value={course}
-              onChange={(e) => handleCourseChange(termIndex, courseIndex, e)}
-            ></input>
-          ))}
-          <button onClick={() => handleCourseCreate(termIndex)}>
-            Add new course
-          </button>
-        </div>
-      ))}
-      <button onClick={() => handleNewTerm()}>Add new term</button>
-      <button onClick={() => handleDeleteTerm()}>Delete last term</button>
-      <button onClick={() => handleSaveTerms()}>Save</button>
+    <div className="flex flex-col items-center pt-4 h-screen w-screen sm:bg-gradient-to-b from-green-300 to-indigo-400">
+      <div className="grid grid-cols-2 sm:grid-cols-3 p-4 w-5/6 gap-4 bg-gray-700 rounded-lg bg-transparent/20">
+        {termsData.map((term, termIndex) => (
+          <div
+            key={termIndex}
+            className="flex flex-col bg-white rounded-lg p-2"
+          >
+            <h2 className="self-center">{term.study_term} Term</h2>
+            {term.courses.map((course, courseIndex) => (
+              <input
+                key={courseIndex}
+                value={course}
+                onChange={(e) => handleCourseChange(termIndex, courseIndex, e)}
+                className="w-36"
+              ></input>
+            ))}
+            <button onClick={() => handleCourseCreate(termIndex)}>
+              Add new course
+            </button>
+          </div>
+        ))}
+      </div>
+      <div className="flex justify-between">
+        <button onClick={() => handleNewTerm()}>Add new term</button>
+        <button onClick={() => handleDeleteTerm()}>Delete last term</button>
+        <button onClick={() => handleSaveTerms()}>Save</button>
+      </div>
     </div>
   );
 }

@@ -22,4 +22,11 @@ class Term(models.Model):
 
     def __str__(self):
         return f"{self.study_term}"
- 
+
+
+class UserTerms(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_terms")
+    terms = models.JSONField(default=list)
+
+    def __str__(self):
+        return f"{self.user}'s terms"

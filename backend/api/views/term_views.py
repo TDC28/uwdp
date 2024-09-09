@@ -36,13 +36,14 @@ def user_terms(request):
             )
 
     if request.method == "GET":
-        # Return the existing UserTerms data for the authenticated user
         return Response(UserTermsSerializer(userterms).data, status=status.HTTP_200_OK)
 
     elif request.method == "PUT":
-        # Update the existing UserTerms object with the provided data
         serialized_userterms = UserTermsSerializer(userterms, data=request.data)
+
         if serialized_userterms.is_valid():
             serialized_userterms.save()
+
             return Response(serialized_userterms.data, status=status.HTTP_200_OK)
+
         return Response(serialized_userterms.errors, status=status.HTTP_400_BAD_REQUEST)

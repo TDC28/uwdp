@@ -25,9 +25,12 @@ Default port: 8000
         - "coreqs": CharField (default: "")
 
 - /api/terms/ (Authentication required)
-    - List all terms (GET)
+    - List the user's terms (GET)
 
     - Add a term (POST)
         - "username": CharField (Read only)
         - "study_term": CharField
         - "courses": JSONField
+
+- /api/terms/all-terms/
+    - List all the terms on the database (GET)

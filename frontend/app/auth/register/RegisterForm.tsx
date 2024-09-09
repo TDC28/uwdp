@@ -1,10 +1,14 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import Cookies from "js-cookie";
 
 export function RegisterForm() {
+  const csrftoken = Cookies.get("csrftoken");
+
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -31,6 +35,7 @@ export function RegisterForm() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "X-CSRFToken": csrftoken ?? "",
       },
 
       body: JSON.stringify({ username, password, email }),

@@ -111,8 +111,10 @@ export default function DashboardPage() {
   //}
   return (
     <div className="sm:bg-gradient-to-b from-green-300 to-indigo-400">
-      <h1 className="text-6xl font-bold p-4">Dashboard</h1>
-      <div className="flex flex-col items-center pt-4 h-screen w-screen ">
+      <div className="flex flex-col items-center h-screen w-screen ">
+        <h1 className="text-6xl font-bold p-4 bg-white rounded-lg m-4">
+          Dashboard
+        </h1>
         <div className="grid grid-cols-2 sm:grid-cols-4 p-4 w-5/6 gap-4 bg-gray-700 rounded-lg bg-transparent/20">
           {termsData.map((term, termIndex) => (
             <div

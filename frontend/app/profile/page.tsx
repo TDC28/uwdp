@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import Cookies from "js-cookie";
 
 export default function ProfilePage() {
   const router = useRouter();
@@ -41,6 +42,28 @@ export default function ProfilePage() {
     getUser();
   }, [router]);
 
+  const logOut = async () => {
+    try {
+      const csrftoken = Cookies.get("csrftoken");
+
+      const response = await fetch("http://localhost:8000/api/auth/logout/", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "X-CSRFToken": csrftoken ?? "",
+        },
+      });
+
+      if (response.ok) {
+        console.log("User logged out");
+      } else {
+        console.log("Error logging out");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   if (loading) {
     return (
       <div className="h-screen w-screen sm:bg-gradient-to-b from-green-300 to-indigo-400"></div>
@@ -65,7 +88,9 @@ export default function ProfilePage() {
             <div>Options</div>
             <Input />
           </div>
-          <Button className="w-full">Log Out</Button>
+          <Button className="w-full" onClick={logOut}>
+            Log Out
+          </Button>
         </div>
       </div>
     </div>

@@ -3,7 +3,7 @@
 import Cookies from "js-cookie";
 
 export default function LogoutPage() {
-  const onSubmit = async () => {
+  const onClick = async () => {
     const csrftoken = Cookies.get("csrftoken");
 
     const response = await fetch("http://localhost:8000/api/auth/logout/", {
@@ -22,5 +22,5 @@ export default function LogoutPage() {
     }
   };
 
-  return <button onClick={onSubmit}>Logout</button>;
+  return <button onClick={onClick}>Logout</button>;
 }

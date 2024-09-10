@@ -86,6 +86,11 @@ export default function DashboardPage() {
   };
 
   const handleSaveTerms = async () => {
+    for (let i = 0; i < termsData.length; i++) {
+      termsData[i].courses.sort();
+    }
+    setTermsData(termsData);
+
     const response = await fetch("http://localhost:8000/api/terms/", {
       method: "PUT",
       headers: {
@@ -106,13 +111,10 @@ export default function DashboardPage() {
     setSaveButtonEnabled(false);
   };
 
-  //for (let i = 0; i < inputFields.length; i++) {
-  //  terms.push(inputFields)
-  //}
   return (
     <div className="sm:bg-gradient-to-b from-green-300 to-indigo-400">
       <div className="flex flex-col items-center h-screen w-screen ">
-        <h1 className="text-6xl font-bold p-4 bg-white rounded-lg m-4">
+        <h1 className="text-5xl font-bold p-4 bg-white rounded-lg m-4">
           Dashboard
         </h1>
         <div className="grid grid-cols-2 sm:grid-cols-4 p-4 w-5/6 gap-4 bg-gray-700 rounded-lg bg-transparent/20">

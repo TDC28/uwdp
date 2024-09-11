@@ -30,3 +30,22 @@ class UserTerms(models.Model):
 
     def __str__(self):
         return f"{self.user}'s terms"
+    
+DEGREE_CHOICES = [
+
+("SCI", "Bachelor's of Science (BSc)"),
+("ENG", "Bachelor's of Engineering (BEng)"),
+("ART", "Bachelor's of Arts (BA)"), 
+("")
+
+
+]
+class Degree(models.Model):
+    degree = models.CharField(max_length= 50, choices=DEGREE_CHOICES)
+
+
+
+class Program(models.Model):
+
+
+class Minor(models.Model):

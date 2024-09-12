@@ -48,18 +48,18 @@ class Program(models.Model):
     # initiates the user definition in the Program model
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_program")
     # Major for user to type in a JSON field,
-    major = models.JSONField()
+    major = models.JSONField(default=list)
     #{Major: {Mathematical Physics, Computer Science, ...}}
-    minor = models.JSONField()
+    minor = models.JSONField(default=list)
      #{Minor: {Computing, ...}}
-    option = models.JSONField()
+    option = models.JSONField(default=list)
      #{Option: {BBA ...}}
 
     def __str__(self):
         return f"{self.user}'s program"
 
 
-    
+
 
 
 # contains 3 JSON fields, Major, Minor and Option 

@@ -36,16 +36,20 @@ DEGREE_CHOICES = [
 ("SCI", "Bachelor's of Science (BSc)"),
 ("ENG", "Bachelor's of Engineering (BEng)"),
 ("ART", "Bachelor's of Arts (BA)"), 
-("")
-
+("MATH", "Bachelor's of Math (BMath)"),
+(),
+(),
+(), 
+(), 
 
 ]
+
 class Degree(models.Model):
     degree = models.CharField(max_length= 50, choices=DEGREE_CHOICES)
 
 
 
-class Program(models.Model):
+# class Program(models.Model):
 
 
-class Minor(models.Model):
+# class Minor(models.Model):

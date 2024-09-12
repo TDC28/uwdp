@@ -31,23 +31,38 @@ class UserTerms(models.Model):
     def __str__(self):
         return f"{self.user}'s terms"
     
-DEGREE_CHOICES = [
+# DEGREE_CHOICES = [
 
-("SCI", "Bachelor's of Science (BSc)"),
-("ENG", "Bachelor's of Engineering (BEng)"),
-("ART", "Bachelor's of Arts (BA)"), 
-("MATH", "Bachelor's of Math (BMath)"),
-(),
-(),
-(), 
-(), 
+# ("SCI", "Bachelor's of Science (BSc)"),
+# ("ENG", "Bachelor's of Engineering (BEng)"),
+# ("ART", "Bachelor's of Arts (BA)"), 
+# ("MATH", "Bachelor's of Math (BMath)"),
+# (),
+# (),
+# (), 
+# (), 
 
-]
+# ]
 
-class Degree(models.Model):
-    degree = models.CharField(max_length= 50, choices=DEGREE_CHOICES)
+class Program(models.Model):
+    # initiates the user definition in the Program model
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_program")
+    # Major for user to type in a JSON field,
+    major = models.JSONField()
+    #{Major: {Mathematical Physics, Computer Science, ...}}
+    minor = models.JSONField()
+     #{Minor: {Computing, ...}}
+    option = models.JSONField()
+     #{Option: {BBA ...}}
+
+    def __str__(self):
+        return f"{self.user}'s program"
 
 
+    
+
+
+# contains 3 JSON fields, Major, Minor and Option 
 
 # class Program(models.Model):
 

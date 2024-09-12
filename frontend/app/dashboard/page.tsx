@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { IoIosCloseCircle } from "react-icons/io";
+import { IconContext } from "react-icons";
 import Cookies from "js-cookie";
 
 interface Term {
@@ -54,6 +56,15 @@ export default function DashboardPage() {
     const newTermsData = [...termsData];
 
     newTermsData[termIndex].courses.push("");
+
+    setTermsData(newTermsData);
+    setSaveButtonEnabled(true);
+  };
+
+  const handleCourseDelete = (termIndex: number, courseIndex: number) => {
+    const newTermsData = [...termsData];
+
+    newTermsData[termIndex].courses.splice(courseIndex, 1);
 
     setTermsData(newTermsData);
     setSaveButtonEnabled(true);
@@ -117,22 +128,31 @@ export default function DashboardPage() {
         <h1 className="text-5xl font-bold p-4 bg-white rounded-lg m-4">
           Dashboard
         </h1>
-        <div className="grid grid-cols-2 sm:grid-cols-4 p-4 w-5/6 gap-4 bg-gray-700 rounded-lg bg-transparent/20">
+        <div className="grid grid-cols-2 sm:grid-cols-3 p-4 w-2/3 gap-4 bg-gray-700 rounded-lg bg-transparent/20">
           {termsData.map((term, termIndex) => (
             <div
               key={termIndex}
-              className="flex flex-col bg-white rounded-lg p-2"
+              className="flex flex-col bg-white rounded-lg p-2 shadow shadow-black"
             >
               <h2 className="self-center text-xl">{term.study_term}</h2>
               {term.courses.map((course, courseIndex) => (
-                <input
-                  key={courseIndex}
-                  value={course}
-                  onChange={(e) =>
-                    handleCourseChange(termIndex, courseIndex, e)
-                  }
-                  className="w-full"
-                ></input>
+                <div className="flex items-center gap-2">
+                  <input
+                    key={courseIndex}
+                    value={course}
+                    onChange={(e) =>
+                      handleCourseChange(termIndex, courseIndex, e)
+                    }
+                    className="w-full p-1 my-1 bg-gray-200 rounded-lg border border-black shadow shadow-black"
+                  ></input>
+                  <button
+                    onClick={() => handleCourseDelete(termIndex, courseIndex)}
+                  >
+                    <IconContext.Provider value={{ color: "#CC0000" }}>
+                      <IoIosCloseCircle size={20} />
+                    </IconContext.Provider>
+                  </button>
+                </div>
               ))}
               <button onClick={() => handleCourseCreate(termIndex)}>
                 Add new course

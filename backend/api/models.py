@@ -31,11 +31,3 @@ class Degree(models.Model):
 
     def __str__(self):
         return f"{self.user}'s program"
-
-
-# contains 3 JSON fields, Major, Minor and Option
-
-# class Program(models.Model):
-
-
-# class Minor(models.Model):

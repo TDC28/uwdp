@@ -1,5 +1,5 @@
 from api.models import Degree
-from api.serializers import CourseSerializer
+from api.serializers import DegreeSerializer
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -12,12 +12,12 @@ def full_program(request):
         program_list = []
 
         for field_of_study in program:
-            program_list.append(CourseSerializer(field_of_study).data)
+            program_list.append(DegreeSerializer(field_of_study).data)
 
         return Response(program_list, status=status.HTTP_200_OK)
 
     elif request.method == "POST":
-        program = CourseSerializer(data=request.data)
+        program = DegreeSerializer(data=request.data)
 
         if program.is_valid():
             program.save()

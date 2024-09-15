@@ -52,6 +52,6 @@ class DegreeSerializer(serializers.ModelSerializer):
         fields = (
             "Degree",
             "Program Name",
-            "Option"
+            "Option",
 
         )

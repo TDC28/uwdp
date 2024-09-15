@@ -25,8 +25,8 @@ class Degree(models.Model):
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="user_program"
     )
-    major = models.JSONField(default=list)
-    minor = models.JSONField(default=list)
+    degree = models.JSONField(default=list)
+    program= models.JSONField(default=list)
     option = models.JSONField(default=list)
 
     def __str__(self):

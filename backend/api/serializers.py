@@ -46,12 +46,12 @@ class UserTermsSerializer(serializers.ModelSerializer):
         model = UserTerms
         fields = ("username", "terms")
 
-class DegreeSerializer(serializers.ModelSerializer): 
-    class Meta: 
+
+class DegreeSerializer(serializers.ModelSerializer):
+    class Meta:
         model = Degree
         fields = (
-            "degree",
-            "program",
-            "option",
-
+            "majors",
+            "minors",
+            "options",
         )

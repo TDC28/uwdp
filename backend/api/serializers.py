@@ -50,7 +50,7 @@ class DegreeSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Degree
         fields = (
-            "dajor",
+            "degree",
             "program",
             "option",
 

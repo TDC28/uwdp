@@ -7,13 +7,13 @@ export default function Home() {
   return (
     <MaxWidthWrapper className="mb-12 mt-28 sm:mt-40 flex flex-col items-center justify-center text-center">
       <h1 className="max-w-4xl text-5xl font-bold md:text-6xl lg:test-7xl">
-        Plan your <span className="text-primary">UW degree</span> like never
-        before.
+        Planning your <span className="text-primary">UW degree</span> will never
+        be easier.
       </h1>
       <p className="mt-5 max-w-prose text-zinc-700 sm:text-lg">
         UWDP is the ultimate degree planner for University of Waterloo students.
         It ensures you meet your program's requirements and the requirements for
-        all courses you take.
+        all courses you want to enrol in.
       </p>
       <Link
         className={buttonVariants({

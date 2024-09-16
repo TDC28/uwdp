@@ -1,10 +1,14 @@
-from api.models import Degree
-from api.serializers import DegreeSerializer
 from rest_framework import status
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-@api_view(["GET", "POST",])
+from api.models import Degree
+from api.serializers import DegreeSerializer
+
+
+@api_view(["GET", "POST"])
+@permission_classes([IsAuthenticated])
 def full_program(request):
     if request.method == "GET":
         program = Degree.objects.all()

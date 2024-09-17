@@ -10,21 +10,16 @@ const Navbar = () => {
           <p className="text-lg font-bold">(Logo)</p>
         </div>
 
-        <div className="flex flex-row">
+        <div className="flex flex-row gap-2">
           <Link
-            href="/Log in"
+            href="/login"
             className={buttonVariants({
               variant: "ghost",
             })}
           >
             Log in
           </Link>
-          <Link
-            href="/dashboard"
-            className={buttonVariants({
-              variant: "ghost",
-            })}
-          >
+          <Link href="/dashboard" className={buttonVariants()}>
             Dashboard
           </Link>
         </div>

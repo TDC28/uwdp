@@ -7,21 +7,6 @@ import Link from "next/link";
 import Decoration from "@/components/Decoration";
 
 export default function Home() {
-  const getUser = async () => {
-    const response = await fetch("http://localhost:8000/api/auth/user/", {
-      method: "GET",
-      credentials: "include",
-    });
-
-    const data = await response.json();
-
-    if (data.user_status === "logged-out") {
-      return null;
-    }
-
-    return data.user;
-  };
-
   return (
     <>
       <MaxWidthWrapper className="mb-12 mt-28 sm:mt-40 flex flex-col items-center justify-center text-center">

@@ -29,7 +29,7 @@ const ProfileIcon = () => {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <div className={buttonVariants({ variant: "ghost" })}>
+        <div className="hover:text-gray-500 transition-colors duration-200">
           <CircleUserRound size={26} />
         </div>
       </PopoverTrigger>

@@ -2,7 +2,16 @@
 
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { useEffect, useState } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import Cookies from "js-cookie";
+import { Input } from "@/components/ui/input";
 
 interface Term {
   study_term: string;
@@ -120,8 +129,30 @@ export default function DeshboardPage() {
     setSaveButtonEnabled(false);
   };
   return (
-    <MaxWidthWrapper>
-      <div></div>
+    <MaxWidthWrapper className="mt-20">
+      <h1 className="text-4xl font-bold">Dashboard</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+        {termsData.map((term, termIndex) => (
+          <Card key={termIndex}>
+            <CardHeader>
+              <CardTitle>{term.study_term}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex flex-col gap-2">
+                {term.courses.map((course, courseIndex) => (
+                  <Input
+                    key={courseIndex}
+                    value={course}
+                    onChange={(e) =>
+                      handleCourseChange(termIndex, courseIndex, e)
+                    }
+                  />
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
     </MaxWidthWrapper>
   );
 }

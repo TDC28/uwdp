@@ -35,11 +35,11 @@ const ProfileIcon = () => {
       </PopoverTrigger>
       <PopoverContent className="w-32 p-2">
         <div className="flex flex-col gap-1">
-          <Button variant="ghost" size="sm" asChild>
-            <button>Account</button>
+          <Button variant="ghost" size="sm">
+            Account
           </Button>
-          <Button variant="ghost" size="sm" asChild>
-            <button onClick={logOut}>Log out</button>
+          <Button variant="ghost" onClick={logOut} size="sm">
+            Log out
           </Button>
         </div>
       </PopoverContent>

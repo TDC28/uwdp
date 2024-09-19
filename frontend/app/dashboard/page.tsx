@@ -12,6 +12,8 @@ import {
 } from "@/components/ui/card";
 import Cookies from "js-cookie";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Plus, X } from "lucide-react";
 
 interface Term {
   study_term: string;
@@ -140,14 +142,26 @@ export default function DeshboardPage() {
             <CardContent>
               <div className="flex flex-col gap-2">
                 {term.courses.map((course, courseIndex) => (
-                  <Input
-                    key={courseIndex}
-                    value={course}
-                    onChange={(e) =>
-                      handleCourseChange(termIndex, courseIndex, e)
-                    }
-                  />
+                  <div className="flex flex-row gap-2">
+                    <Input
+                      key={courseIndex}
+                      value={course}
+                      onChange={(e) =>
+                        handleCourseChange(termIndex, courseIndex, e)
+                      }
+                    />
+                    <Button
+                      onClick={() => handleCourseDelete(termIndex, courseIndex)}
+                      size="icon"
+                      variant="destructive"
+                    >
+                      <X className="self-center h-[1.2rem] w-[1.2rem]" />
+                    </Button>
+                  </div>
                 ))}
+                <Button onClick={() => handleCourseCreate(termIndex)}>
+                  <Plus className="h-[1.2rem] w-[1.2rem]" />
+                </Button>
               </div>
             </CardContent>
           </Card>

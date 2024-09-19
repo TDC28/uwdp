@@ -1,32 +1,17 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
-import { buttonVariants } from "./ui/button";
-import { UserRound } from "lucide-react";
+import { buttonVariants, Button } from "./ui/button";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { CircleUserRound } from "lucide-react";
+import { useAuth } from "@/context/AuthContext";
 
 const ProfileIcon = () => {
-  const [user, setUser] = useState(null);
-
-  const getUser = async () => {
-    const response = await fetch("http://localhost:8000/api/auth/user/", {
-      method: "GET",
-      credentials: "include",
-    });
-
-    const data = await response.json();
-
-    if (data.user_status === "logged-out") {
-      setUser(null);
-    } else {
-      setUser(data.user);
-    }
-  };
-
-  useEffect(() => {
-    getUser();
-    console.log(user);
-  }, [user]);
+  const { user, logOut } = useAuth();
 
   if (user == null) {
     return (
@@ -41,7 +26,25 @@ const ProfileIcon = () => {
     );
   }
 
-  return <UserRound />;
+  return (
+    <Popover>
+      <PopoverTrigger asChild>
+        <div className={buttonVariants({ variant: "ghost" })}>
+          <CircleUserRound size={26} />
+        </div>
+      </PopoverTrigger>
+      <PopoverContent className="w-32 p-2">
+        <div className="flex flex-col gap-1">
+          <Button variant="ghost" size="sm" asChild>
+            <button>Account</button>
+          </Button>
+          <Button variant="ghost" size="sm" asChild>
+            <button onClick={logOut}>Log out</button>
+          </Button>
+        </div>
+      </PopoverContent>
+    </Popover>
+  );
 };
 
 export default ProfileIcon;

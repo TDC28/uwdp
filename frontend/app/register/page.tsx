@@ -3,13 +3,12 @@
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { Button, buttonVariants } from "@/components/ui/button";
-import Cookies from "js-cookie";
+import { useAuth } from "@/context/AuthContext";
 
-interface IFormInput {
+interface RegisterFormInput {
   email: string;
   username: string;
   password: string;
@@ -17,49 +16,23 @@ interface IFormInput {
 }
 
 export default function RegisterPage() {
-  const router = useRouter();
-  const [error, setError] = useState<string | null>(null);
-  const csrftoken = Cookies.get("csrftoken");
+  const { createUser } = useAuth();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     watch,
-  } = useForm<IFormInput>();
-
+  } = useForm<RegisterFormInput>();
   const password = watch("password");
-
-  const onSubmit = async (data: IFormInput) => {
-    const { confirmPassword, ...postData } = data;
-    try {
-      const response = await fetch("http://localhost:8000/api/auth/register/", {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-          "X-CSRFToken": csrftoken ?? "",
-        },
-        body: JSON.stringify(postData),
-      });
-
-      const responseData = await response.json();
-
-      if (!response.ok) {
-        setError(responseData.username);
-        throw new Error("Registration failed");
-      }
-
-      console.log("Registration successful", responseData);
-      router.push("/");
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
 
   return (
     <MaxWidthWrapper className="mt-20">
       <div className="p-4">
-        <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
+        <form
+          className="flex flex-col gap-4"
+          onSubmit={handleSubmit(createUser)}
+        >
           <h1 className="text-4xl font-bold">Create an account</h1>
           <div className="flex flex-row gap-4 items-center">
             <p className="text-lg">Already have an account?</p>
@@ -113,7 +86,6 @@ export default function RegisterPage() {
               {errors.confirmPassword.message}
             </span>
           )}
-          {error && <span className="text-red-500 text-sm">{error}</span>}
 
           <Button type="submit">Create account</Button>
         </form>

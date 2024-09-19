@@ -72,6 +72,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         },
       });
       setUser(null);
+      router.push("/login");
     } catch (error) {
       console.log("Error logging out");
     }

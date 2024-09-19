@@ -7,7 +7,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { CircleUserRound } from "lucide-react";
+import { UserRound } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 
 const ProfileIcon = () => {
@@ -29,9 +29,9 @@ const ProfileIcon = () => {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <div className="hover:text-gray-500 transition-colors duration-200">
-          <CircleUserRound size={26} />
-        </div>
+        <Button variant="outline" size="icon">
+          <UserRound className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100" />
+        </Button>
       </PopoverTrigger>
       <PopoverContent className="w-32 p-2">
         <div className="flex flex-col gap-1">

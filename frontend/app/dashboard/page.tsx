@@ -19,7 +19,7 @@ import {
 import Cookies from "js-cookie";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Plus, Trash2 } from "lucide-react";
+import { Plus, Trash2, EllipsisVertical } from "lucide-react";
 
 interface Term {
   study_term: string;
@@ -139,7 +139,19 @@ export default function DeshboardPage() {
   return (
     <MaxWidthWrapper className="mt-20">
       <h1 className="text-4xl font-bold">Dashboard</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+      <div className="flex flex-row justify-between items-center pt-6 pb-3">
+        <div className="flex flex-row gap-4">
+          <Button variant="outline" onClick={() => handleNewTerm()}>
+            Add new term
+          </Button>
+          <Button variant="outline" onClick={() => handleDeleteTerm()}>
+            Delete last term
+          </Button>
+        </div>
+        <Button onClick={() => handleSaveTerms()}>Save changes</Button>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         {termsData.map((term, termIndex) => (
           <Card key={termIndex}>
             <CardHeader>
@@ -160,7 +172,7 @@ export default function DeshboardPage() {
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
                         <button className="absolute right-2 self-center">
-                          <span className="text-xl">⋮</span>
+                          <EllipsisVertical className="h-[1rem] w-[1rem]" />
                         </button>
                       </DropdownMenuTrigger>
                       <DropdownMenuContent>

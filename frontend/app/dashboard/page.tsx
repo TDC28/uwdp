@@ -2,24 +2,11 @@
 
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { useEffect, useState } from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
-} from "@/components/ui/dropdown-menu";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Cookies from "js-cookie";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Plus, Trash2, EllipsisVertical } from "lucide-react";
+import { Plus, Trash2 } from "lucide-react";
 
 interface Term {
   study_term: string;
@@ -169,26 +156,15 @@ export default function DeshboardPage() {
                         handleCourseChange(termIndex, courseIndex, e)
                       }
                     />
-                    <DropdownMenu>
-                      <DropdownMenuTrigger asChild>
-                        <button className="absolute right-2 self-center">
-                          <EllipsisVertical className="h-[1rem] w-[1rem]" />
-                        </button>
-                      </DropdownMenuTrigger>
-                      <DropdownMenuContent>
-                        <DropdownMenuItem
-                          onClick={() =>
-                            handleCourseDelete(termIndex, courseIndex)
-                          }
-                        >
-                          <Trash2
-                            color="red"
-                            className="h-[1.2rem] w-[1.2rem] pr-1"
-                          />
-                          <span className="text-red-500">Delete</span>
-                        </DropdownMenuItem>
-                      </DropdownMenuContent>
-                    </DropdownMenu>
+                    <Button
+                      variant="ghost"
+                      className="absolute right-[4.5px] self-center h-8 w-8"
+                      onClick={() => handleCourseDelete(termIndex, courseIndex)}
+                    >
+                      <span>
+                        <Trash2 className="h-[0.8rem] w-[0.8rem]" />
+                      </span>
+                    </Button>
                   </div>
                 ))}
                 <Button onClick={() => handleCourseCreate(termIndex)}>

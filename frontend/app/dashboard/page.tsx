@@ -10,10 +10,16 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "@/components/ui/dropdown-menu";
 import Cookies from "js-cookie";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Plus, X } from "lucide-react";
+import { Plus, Trash2 } from "lucide-react";
 
 interface Term {
   study_term: string;
@@ -140,23 +146,37 @@ export default function DeshboardPage() {
               <CardTitle>{term.study_term}</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2 relative">
                 {term.courses.map((course, courseIndex) => (
                   <div className="flex flex-row gap-2">
                     <Input
                       key={courseIndex}
+                      className="pr-10"
                       value={course}
                       onChange={(e) =>
                         handleCourseChange(termIndex, courseIndex, e)
                       }
                     />
-                    <Button
-                      onClick={() => handleCourseDelete(termIndex, courseIndex)}
-                      size="icon"
-                      variant="destructive"
-                    >
-                      <X className="self-center h-[1.2rem] w-[1.2rem]" />
-                    </Button>
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <button className="absolute right-2 self-center">
+                          <span className="text-xl">⋮</span>
+                        </button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent>
+                        <DropdownMenuItem
+                          onClick={() =>
+                            handleCourseDelete(termIndex, courseIndex)
+                          }
+                        >
+                          <Trash2
+                            color="red"
+                            className="h-[1.2rem] w-[1.2rem] pr-1"
+                          />
+                          <span className="text-red-500">Delete</span>
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
                   </div>
                 ))}
                 <Button onClick={() => handleCourseCreate(termIndex)}>

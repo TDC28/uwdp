@@ -34,3 +34,11 @@ Default port: 8000
 
 - /api/terms/all-terms/
     - List all the terms on the database (GET)
+
+- /api/full-program
+    - List user Major, Minors and Options (GET)
+
+    - Add a degree (POST) 
+        - "majors": JSONField
+        - "minors": JSONField
+        - "option": JSONField

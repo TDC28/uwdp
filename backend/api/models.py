@@ -22,20 +22,10 @@ class UserTerms(models.Model):
 
 
 class Degree(models.Model):
-    user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="user_program"
-    )
-    major = models.JSONField(default=list)
-    minor = models.JSONField(default=list)
-    option = models.JSONField(default=list)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_degree")
+    majors = models.JSONField(default=list)
+    minors = models.JSONField(default=list)
+    options = models.JSONField(default=list)
 
     def __str__(self):
-        return f"{self.user}'s program"
-
-
-# contains 3 JSON fields, Major, Minor and Option
-
-# class Program(models.Model):
-
-
-# class Minor(models.Model):
+        return f"{self.user}'s degree"

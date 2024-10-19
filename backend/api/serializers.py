@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 
-from api.models import Course, UserTerms
+from api.models import Course, Degree, UserTerms
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -45,3 +45,11 @@ class UserTermsSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserTerms
         fields = ("username", "terms")
+
+
+class DegreeSerializer(serializers.ModelSerializer):
+    username = serializers.CharField(source="user.username", read_only=True)
+
+    class Meta:
+        model = Degree
+        fields = ("username", "majors", "minors", "options")

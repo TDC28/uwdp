@@ -1,20 +1,25 @@
 "use client";
 
+import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import { useEffect, useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Cookies from "js-cookie";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Plus, Trash2 } from "lucide-react";
 
 interface Term {
   study_term: string;
   courses: string[];
 }
 
-export default function DashboardPage() {
+export default function DeshboardPage() {
   const [termsData, setTermsData] = useState<Term[]>([]);
   const [saveButtonEnabled, setSaveButtonEnabled] = useState(false);
   const csrftoken = Cookies.get("csrftoken");
 
   useEffect(() => {
-    const getTerms = async () => {
+    const fetchTerms = async () => {
       try {
         const response = await fetch("http://localhost:8000/api/terms/", {
           method: "GET",
@@ -23,18 +28,17 @@ export default function DashboardPage() {
 
         if (response.ok) {
           const data = await response.json();
-          console.log(data);
+          console.log(data.terms);
           setTermsData(data.terms);
         } else {
           console.log("An error occured fetching terms");
           console.log("Are you logged in?");
-          // Do stuff
         }
       } catch (error) {
-        console.log("Error: ", error);
+        console.log(error);
       }
     };
-    getTerms();
+    fetchTerms();
   }, []);
 
   const handleCourseChange = (
@@ -54,6 +58,15 @@ export default function DashboardPage() {
     const newTermsData = [...termsData];
 
     newTermsData[termIndex].courses.push("");
+
+    setTermsData(newTermsData);
+    setSaveButtonEnabled(true);
+  };
+
+  const handleCourseDelete = (termIndex: number, courseIndex: number) => {
+    const newTermsData = [...termsData];
+
+    newTermsData[termIndex].courses.splice(courseIndex, 1);
 
     setTermsData(newTermsData);
     setSaveButtonEnabled(true);
@@ -110,57 +123,58 @@ export default function DashboardPage() {
 
     setSaveButtonEnabled(false);
   };
-
   return (
-    <div className="sm:bg-gradient-to-b from-green-300 to-indigo-400">
-      <div className="flex flex-col items-center h-screen w-screen ">
-        <h1 className="text-5xl font-bold p-4 bg-white rounded-lg m-4">
-          Dashboard
-        </h1>
-        <div className="grid grid-cols-2 sm:grid-cols-4 p-4 w-5/6 gap-4 bg-gray-700 rounded-lg bg-transparent/20">
-          {termsData.map((term, termIndex) => (
-            <div
-              key={termIndex}
-              className="flex flex-col bg-white rounded-lg p-2"
-            >
-              <h2 className="self-center text-xl">{term.study_term}</h2>
-              {term.courses.map((course, courseIndex) => (
-                <input
-                  key={courseIndex}
-                  value={course}
-                  onChange={(e) =>
-                    handleCourseChange(termIndex, courseIndex, e)
-                  }
-                  className="w-full"
-                ></input>
-              ))}
-              <button onClick={() => handleCourseCreate(termIndex)}>
-                Add new course
-              </button>
-            </div>
-          ))}
-        </div>
-        <div className="flex justify-between">
-          <button
-            className="bg-white rounded-lg m-2 p-2"
-            onClick={() => handleNewTerm()}
-          >
+    <MaxWidthWrapper className="mt-20">
+      <h1 className="text-4xl font-bold">Dashboard</h1>
+      <div className="flex flex-row justify-between items-center pt-6 pb-3">
+        <div className="flex flex-row gap-4">
+          <Button variant="outline" onClick={() => handleNewTerm()}>
             Add new term
-          </button>
-          <button
-            className="bg-white rounded-lg m-2 p-2"
-            onClick={() => handleDeleteTerm()}
-          >
+          </Button>
+          <Button variant="outline" onClick={() => handleDeleteTerm()}>
             Delete last term
-          </button>
-          <button
-            className="bg-white rounded-lg m-2 p-2"
-            onClick={() => handleSaveTerms()}
-          >
-            Save
-          </button>
+          </Button>
         </div>
+        <Button onClick={() => handleSaveTerms()}>Save changes</Button>
       </div>
-    </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        {termsData.map((term, termIndex) => (
+          <Card key={termIndex}>
+            <CardHeader>
+              <CardTitle>{term.study_term}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex flex-col gap-2 relative">
+                {term.courses.map((course, courseIndex) => (
+                  <div className="flex flex-row gap-2">
+                    <Input
+                      key={courseIndex}
+                      className="pr-10"
+                      value={course}
+                      onChange={(e) =>
+                        handleCourseChange(termIndex, courseIndex, e)
+                      }
+                    />
+                    <Button
+                      variant="ghost"
+                      className="absolute right-[4.5px] self-center h-8 w-8"
+                      onClick={() => handleCourseDelete(termIndex, courseIndex)}
+                    >
+                      <span>
+                        <Trash2 className="h-[0.8rem] w-[0.8rem]" />
+                      </span>
+                    </Button>
+                  </div>
+                ))}
+                <Button onClick={() => handleCourseCreate(termIndex)}>
+                  <Plus className="h-[1.2rem] w-[1.2rem]" />
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    </MaxWidthWrapper>
   );
 }

@@ -1,10 +1,10 @@
 # UWDP
 
-UWDP is an attempted replacement for UW Path, which is no longer maintained. UWDP is still in its early developpment stages.
+UWDP is an attempted replacement for UW Path, which is no longer maintained. UWDP is still in development.
 
 ## Try UWDP
 
-Clone the repository, then run the frontend and backend.
+To run the UWDP full-stack web application, follow these steps to set up both the frontend and backend.
 
 - Frontend
 ```bash
@@ -14,8 +14,8 @@ npm run dev
 ```
 
 - Backend
-> [!WARNING]
-> You should use a virtual environment
+> [!NOTE]
+> We recommend using a python virtual environment.
 
 ```bash
 cd backend
